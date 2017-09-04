@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TreeWithIterator
 {
@@ -7,6 +6,11 @@ namespace TreeWithIterator
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Hello World!");
+            var tree = new TreeWithIterator<int>();
+            tree.Add(1);
+            tree.Add(2);
+            tree.Print();
         }
     }
 }
