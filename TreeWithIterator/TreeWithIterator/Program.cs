@@ -21,6 +21,8 @@ namespace TreeWithIterator
             {
                 Console.WriteLine(i);
             }
+            Console.WriteLine("===");
+            Console.WriteLine(tree.Count);
         }
     }
 }

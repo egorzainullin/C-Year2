@@ -9,21 +9,12 @@ namespace TreeWithIterator
     {
         private TreeElement root;
 
-        public void Print()
+        public void Clear()
         {
-            Print(root);
-            void Print(TreeElement root)
-            {
-                if (root == null)
-                {
-                    return;
-                }
-                Console.WriteLine(root.Value);
-                Print(root.LeftChild);
-                Print(root.RightChild);
-            }
-            Console.WriteLine("===");
+            root = null;
         }
+
+        public int Count { get; private set; }
 
         public void Add(T value)
         {
@@ -35,6 +26,7 @@ namespace TreeWithIterator
             if (root == null)
             {
                 root = new TreeElement(null, null, value);
+                ++this.Count;
                 return;
             }
             switch (value.CompareTo(root.Value))
@@ -87,7 +79,6 @@ namespace TreeWithIterator
                 return;
             }
             DeleteNode(ref this.root, value);
-
         }
 
         private void DeleteNode(ref TreeElement node, T value)
@@ -105,6 +96,7 @@ namespace TreeWithIterator
                     DeleteNode(ref node.RightChild, value);
                     break;
                 case 0:
+                    --this.Count;
                     if (node.LeftChild == null)
                     {
                         node = node.RightChild;
@@ -115,6 +107,7 @@ namespace TreeWithIterator
                         node = node.RightChild;
                         return;
                     }
+                    ++this.Count;
                     var nearestNode = node.LeftChild;
                     nearestNode = FindNearest(node, value);
                     node.Value = nearestNode.Value;
@@ -149,10 +142,8 @@ namespace TreeWithIterator
 
             public TreeEnumerator(TreeElement root)
             {
-                stack = new Stack<TreeElement>();
                 this.root = root;
-                stack.Push(root);
-                IsJustStarted = true;
+                Reset();
             }
 
             public T Current => stack.Peek().Value;
@@ -191,7 +182,10 @@ namespace TreeWithIterator
             public void Reset()
             {
                 stack = new Stack<TreeElement>();
-                stack.Push(root);
+                if (root != null)
+                {
+                    stack.Push(root);
+                }
                 IsJustStarted = true;
             }
         }
