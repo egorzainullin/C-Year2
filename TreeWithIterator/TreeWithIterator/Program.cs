@@ -13,10 +13,8 @@ namespace TreeWithIterator
             tree.Add(1);
             tree.Add(4);
             tree.Add(5);
-            tree.Print();
             tree.Remove(1);
             tree.Remove(2);
-            tree.Print();
             foreach(var i in tree)
             {
                 Console.WriteLine(i);
