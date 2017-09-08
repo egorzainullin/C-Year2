@@ -185,7 +185,7 @@ namespace TreeWithIterator
             /// <summary>
             /// Stack to keep nodes
             /// </summary>
-            private Stack<TreeElement> stack;
+            private SimpleStack<TreeElement> stack;
 
             /// <summary>
             /// Root of tree
@@ -260,7 +260,7 @@ namespace TreeWithIterator
             /// </summary>
             public void Reset()
             {
-                stack = new Stack<TreeElement>();
+                stack = new SimpleStack<TreeElement>();
                 if (root != null)
                 {
                     stack.Push(root);
