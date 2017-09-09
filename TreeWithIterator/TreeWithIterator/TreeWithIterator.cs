@@ -112,6 +112,7 @@ namespace TreeWithIterator
             {
                 return;
             }
+            --this.Count;
             DeleteNode(ref this.root, value);
         }
 
@@ -135,7 +136,6 @@ namespace TreeWithIterator
                     DeleteNode(ref node.RightChild, value);
                     break;
                 case 0:
-                    --this.Count;
                     if (node.LeftChild == null)
                     {
                         node = node.RightChild;
@@ -146,7 +146,6 @@ namespace TreeWithIterator
                         node = node.RightChild;
                         return;
                     }
-                    ++this.Count;
                     var nearestNode = node.LeftChild;
                     nearestNode = FindNearest(node, value);
                     node.Value = nearestNode.Value;
@@ -237,7 +236,7 @@ namespace TreeWithIterator
                 if (IsJustStarted)
                 {
                     IsJustStarted = false;
-                    return true;
+                    return root == null ? false : true;
                 }
                 if (stack.Count == 0)
                 {

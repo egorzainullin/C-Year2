@@ -6,7 +6,6 @@ namespace TreeWithIterator
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             var tree = new TreeWithIterator<int>();
             tree.Add(2);
             tree.Add(3);

@@ -42,9 +42,36 @@ namespace TreeWithIteratorTests
         }
 
         [TestMethod]
-        public void EnumeratorTest()
+        public void IsContainedTest()
         {
+            Assert.IsTrue(tree.IsContained(1));
+            Assert.IsFalse(tree.IsContained(4));
+        }
 
+        [TestMethod]
+        public void EnumeratorTest1()
+        {
+            int i = 0;
+            foreach(var value in tree)
+            {
+                ++i;
+            }
+            Assert.AreEqual(3, i);
+            tree.Clear();
+            i = 0;
+            foreach(var value in tree)
+            {
+                ++i;
+            }
+            Assert.AreEqual(0, i);
+        }
+
+        [TestMethod]
+        public void EnumeratorTest2()
+        {
+            var iterator = tree.GetEnumerator();
+            iterator.MoveNext();
+            Assert.AreEqual(2, iterator.Current);
         }
 
     }
