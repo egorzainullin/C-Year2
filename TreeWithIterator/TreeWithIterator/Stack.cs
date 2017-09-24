@@ -68,12 +68,12 @@ namespace StackList
         /// <summary>
         /// Pops value from stack
         /// </summary>
-        /// <exception cref="NullReferenceException">Trying to get value from empty stack</exception>
+        /// <exception cref="InvalidOperationException">Trying to get value from empty stack</exception>
         public T Pop()
         {
             if (head == null)
             {
-                throw new NullReferenceException("Attempt to pop value from empty stack");
+                throw new InvalidOperationException("Attempt to pop value from empty stack");
             }
             T value = head.Value;
             head = head.Next;
@@ -85,12 +85,12 @@ namespace StackList
         /// Peeks value from stack 
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="NullReferenceException">Trying to get value from empty stack</exception>
+        /// <exception cref="InvalidOperationException">Trying to get value from empty stack</exception>
         public T Peek()
         {
             if (head == null)
             {
-                throw new NullReferenceException("Attempt to peek value from empty stack");
+                throw new InvalidOperationException("Attempt to peek value from empty stack");
             }
             return head.Value;
         }

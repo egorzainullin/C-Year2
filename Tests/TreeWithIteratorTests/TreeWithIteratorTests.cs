@@ -37,7 +37,9 @@ namespace TreeWithIteratorTests
         [TestMethod]
         public void RemoveTest()
         {
+            tree.Add(10);
             tree.Remove(2);
+            tree.Remove(10);
             Assert.AreEqual(2, tree.Count);
         }
 
@@ -52,14 +54,14 @@ namespace TreeWithIteratorTests
         public void EnumeratorTest1()
         {
             int i = 0;
-            foreach(var value in tree)
+            foreach (var value in tree)
             {
                 ++i;
             }
             Assert.AreEqual(3, i);
             tree.Clear();
             i = 0;
-            foreach(var value in tree)
+            foreach (var value in tree)
             {
                 ++i;
             }

@@ -32,7 +32,7 @@ namespace StackList.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void PopErrorTest()
         {
             stack.Pop();
@@ -47,7 +47,7 @@ namespace StackList.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void PeekErrorTest()
         {
             stack.Peek();

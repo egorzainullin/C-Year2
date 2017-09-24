@@ -146,33 +146,37 @@ namespace TreeWithIterator
                         node = node.RightChild;
                         return;
                     }
-                    var nearestNode = node.LeftChild;
-                    nearestNode = FindNearest(node, value);
-                    node.Value = nearestNode.Value;
-                    DeleteNode(ref node.LeftChild, nearestNode.Value);
+                    var suitableValue = FindNearest(ref node.LeftChild, value);
+                    node.Value = suitableValue;
                     return;
             }
         }
 
         /// <summary>
-        /// Finds nearest to value  
+        /// Finds nearest value 
         /// </summary>
         /// <param name="node">Node from which we start</param>
         /// <param name="value">Value to find</param>
-        /// <returns></returns>
-        private TreeElement FindNearest(TreeElement node, T value)
+        /// <returns>Value is near value to delete</returns>
+        private T FindNearest(ref TreeElement node, T value)
         {
-            var nearestNode = node;
-            switch (value.CompareTo(root.Value))
+
+            if (node.RightChild == null)
             {
-                case 0:
-                    return root;
-                case 1:
-                    return FindNearest(root.RightChild, value);
-                case -1:
-                    return FindNearest(root.LeftChild, value);
-                default:
-                    return null;
+                var temp = node.Value;
+                if (node.LeftChild == null)
+                {
+                    node = null;
+                }
+                else
+                {
+                    node = node.LeftChild;
+                }
+                return temp;
+            }
+            else
+            {
+                return FindNearest(ref node.RightChild, value);
             }
         }
 
@@ -236,7 +240,7 @@ namespace TreeWithIterator
                 if (IsJustStarted)
                 {
                     IsJustStarted = false;
-                    return root == null ? false : true;
+                    return root != null;
                 }
                 if (stack.Count == 0)
                 {
