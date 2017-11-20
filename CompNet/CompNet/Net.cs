@@ -32,18 +32,51 @@ namespace CompNet
 
         public void NewTurn()
         {
-            var tempGraph = new bool[graph.GetLength(0), graph.GetLength(1)];
             int length = graph.GetLength(0);
+            var tempState = new bool[length];
             for (int i = 0; i < length; i++)
             {
+                tempState[i] = computers[i].IsInfected;
+            }
+            for (int i = 0; i < length; i++)
+            {
+                if (computers[i].IsInfected)
+                {
+                    continue;
+                }
                 for (int j = 0; j < length; j++)
                 {
-                    tempGraph[i, j] = graph[i, j];
+                    if (graph[i, j] && tempState[j])
+                    {
+                        if (computers[i].ProbabilityOfInfection >= internalRandom.NextDouble())
+                        {
+                            computers[i].SetInfected();
+                        }
+                    }
                 }
             }
         }
 
-        public Net (IMachine[] arrayOfComputers, bool[,] graph)
-            : this (arrayOfComputers, graph, new Random()) { }
+        public bool IsEndOfProcess()
+        {
+            int length = computers.Length;
+            for (int i = 0; i < length; i++)
+            {
+                if (!computers[i].IsInfected && computers[i].ProbabilityOfInfection > 0)
+                {
+                    for (int j = 0; j < length; j++)
+                    {
+                        if (graph[i, j] && computers[j].IsInfected)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        public Net(IMachine[] arrayOfComputers, bool[,] graph)
+            : this(arrayOfComputers, graph, new Random()) { }
     }
 }

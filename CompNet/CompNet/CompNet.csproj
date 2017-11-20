@@ -42,9 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompFactory.cs" />
     <Compile Include="Computer.cs" />
+    <Compile Include="FakeRandom.cs" />
     <Compile Include="IMachine.cs" />
     <Compile Include="Net.cs" />
+    <Compile Include="OS.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
