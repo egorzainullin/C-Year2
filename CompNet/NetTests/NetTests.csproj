@@ -48,12 +48,20 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompFactoryTests.cs" />
+    <Compile Include="ComputerTests.cs" />
     <Compile Include="FakeRandom.cs" />
     <Compile Include="NetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CompNet\CompNet.csproj">
+      <Project>{09A86E56-C1BC-44A3-82B6-541B871F0B13}</Project>
+      <Name>CompNet</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,8 @@
 ﻿namespace CompNet
 {
+    /// <summary>
+    /// Enumeration of Operating System types
+    /// </summary>
     public enum OS
     {
         Mac = 0,

@@ -6,7 +6,22 @@ namespace CompNet
     /// </summary>
     public class FakeRandom : Random
     {
+        /// <summary>
+        /// Random values
+        /// </summary>
         private double[] values = { 0.5 };
+        
+        /// <summary>
+        /// Initialize a new instance of <see cref="FakeRandom"/> with default fake random values
+        /// </summary>
+        public FakeRandom()
+        { }
+
+        /// <summary>
+        /// Initialize a new instance of <see cref="FakeRandom"/> 
+        /// </summary>
+        /// <param name="values"></param>
+        public FakeRandom(double[] values) => this.values = values;
 
         /// <summary>
         /// Set fake random values into next double method
