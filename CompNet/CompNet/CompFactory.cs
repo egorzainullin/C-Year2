@@ -16,9 +16,9 @@ namespace CompNet
         /// <returns></returns>
         public IMachine CreateComp(OS os, bool isInfected)
         {
-            switch(os)
+            switch (os)
             {
-                case OS.Linux :
+                case OS.Linux:
                     return new Computer("Linux", 0.4, isInfected);
                 case OS.Mac:
                     return new Computer("Mac", 0.2, isInfected);

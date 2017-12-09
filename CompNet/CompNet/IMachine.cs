@@ -1,5 +1,8 @@
 ﻿namespace CompNet
 {
+    /// <summary>
+    /// This interface which has general info about computer
+    /// </summary>
     public interface IMachine
     {
         /// <summary>

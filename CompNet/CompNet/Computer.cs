@@ -1,5 +1,8 @@
 ﻿namespace CompNet
 {
+    /// <summary>
+    /// This class is model of computer that might be infected
+    /// </summary>
     public class Computer : IMachine
     {
         /// <summary>
@@ -26,7 +29,7 @@
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="Computer"/>
+        /// Initialize a new instance of the <see cref="Computer" />
         /// </summary>
         /// <param name="typeOfOS">Type of OS</param>
         /// <param name="probability">Possibility of infection</param>
@@ -46,7 +49,7 @@
             {
                 ProbabilityOfInfection = probability;
             }
-            IsInfected = isInfected; 
+            IsInfected = isInfected;
         }
     }
 }

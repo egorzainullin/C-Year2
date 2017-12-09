@@ -3,7 +3,7 @@
 namespace CompNet
 {
     /// <summary>
-    /// This class is responsible for malvare spreading emulation 
+    /// This class is responsible for virus spreading emulation 
     /// </summary>
     public class Net
     {
@@ -44,7 +44,7 @@ namespace CompNet
         private Random internalRandom;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Net"/>
+        /// Initializes a new instance of the <see cref="Net" />
         /// NOTE: we consider graph directional and we don't care about vertex which enters itself
         /// </summary>
         /// <param name="arrayOfComputers">Set of computers</param>
@@ -112,7 +112,7 @@ namespace CompNet
         }
 
         /// <summary>
-        /// Initialize a new instance of <see cref="Net"/>
+        /// Initializes a new instance of the <see cref="Net" />
         /// NOTE: we consider graph directional and we don't care about vertex which enters itself
         /// </summary>
         /// <param name="arrayOfComputers">Set of computers</param>
