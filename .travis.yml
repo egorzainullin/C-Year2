@@ -6,7 +6,5 @@ notifications:
   email: false
 script:
  - dotnet restore
- - dotnet build
- - cd Tests
- - dotnet test
- - cd ..
+ - dotnet build HomeWork.sln
+ - dotnet test HomeWorkTests.sln
