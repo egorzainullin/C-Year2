@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreeWithIteratorTests", "Tests\TreeWithIteratorTests\TreeWithIteratorTests.csproj", "{0221CBCD-2C21-4452-A65E-0F3D9CC35C6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreeWithIteratorTests", "TreeWithIteratorTests\TreeWithIteratorTests.csproj", "{367C6EFC-E347-4779-A114-7FE24A676866}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,10 +10,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0221CBCD-2C21-4452-A65E-0F3D9CC35C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0221CBCD-2C21-4452-A65E-0F3D9CC35C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0221CBCD-2C21-4452-A65E-0F3D9CC35C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0221CBCD-2C21-4452-A65E-0F3D9CC35C6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{367C6EFC-E347-4779-A114-7FE24A676866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{367C6EFC-E347-4779-A114-7FE24A676866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{367C6EFC-E347-4779-A114-7FE24A676866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{367C6EFC-E347-4779-A114-7FE24A676866}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

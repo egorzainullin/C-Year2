@@ -5,5 +5,8 @@ dist: trusty
 notifications:
   email: false
 script:
- - dotnet build HomeWork.sln
- - dotnet test HomeWorkTests.sln
+ - dotnet restore
+ - dotnet build
+ - cd Tests
+ - dotnet test
+ - cd ..
