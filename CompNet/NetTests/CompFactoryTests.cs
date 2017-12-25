@@ -17,13 +17,13 @@ namespace CompNet.Tests
             var factory = new CompFactory();
             var comp1 = factory.CreateComp(OS.Linux, true);
             Assert.AreEqual("Linux", comp1.TypeOfOS);
-            Assert.AreEqual(true, comp1.IsInfected);
+            Assert.IsTrue(comp1.IsInfected);
             var comp2 = factory.CreateComp(OS.Mac, false);
             Assert.AreEqual("Mac", comp2.TypeOfOS);
-            Assert.AreEqual(false, comp2.IsInfected);
+            Assert.IsFalse(comp2.IsInfected);
             var comp3 = factory.CreateComp(OS.Windows, true);
             Assert.AreEqual("Windows", comp3.TypeOfOS);
-            Assert.AreEqual(true, comp3.IsInfected);
+            Assert.IsTrue(comp3.IsInfected);
         }
     }
 }

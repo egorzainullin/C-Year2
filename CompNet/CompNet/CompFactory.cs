@@ -5,7 +5,7 @@ namespace CompNet
     /// <summary>
     /// Creates computers for more comfortable testing
     /// </summary>
-    /// <exception cref="NotImplementedException">This operating system does not support unfortunately</exception>
+    /// <exception cref="NotImplementedException">This operating system is not support unfortunately</exception>
     public class CompFactory
     {
         /// <summary>
@@ -13,7 +13,7 @@ namespace CompNet
         /// </summary>
         /// <param name="os">Type of OS</param>
         /// <param name="isInfected">Is this computer has been infected</param>
-        /// <returns></returns>
+        /// <returns>Computer with this parameters</returns>
         public IMachine CreateComp(OS os, bool isInfected)
         {
             switch (os)

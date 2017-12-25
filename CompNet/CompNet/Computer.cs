@@ -23,10 +23,8 @@
         /// <summary>
         /// Sets this computer infected
         /// </summary>
-        public void SetInfected()
-        {
-            IsInfected = true;
-        }
+        public void SetInfected() => IsInfected = true;
+        
 
         /// <summary>
         /// Initialize a new instance of the <see cref="Computer" />
