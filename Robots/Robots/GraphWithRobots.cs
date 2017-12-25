@@ -50,8 +50,8 @@ namespace Robots
         /// <summary>
         /// Gets neighbors of this node
         /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
+        /// <param name="node">Node to find neighbors</param>
+        /// <returns>List of neighbors</returns>
         private List<int> GetNeighbors(int node)
         {
             int length = Graph.GetLength(0);
