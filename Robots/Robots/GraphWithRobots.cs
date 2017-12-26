@@ -15,7 +15,7 @@ namespace Robots
         /// <summary>
         /// Initial robots' positions
         /// </summary>
-        public IList<int> Positions { get; private set; }
+        public IList<int> Positions { get; }
 
         /// <summary>
         /// Initializes a new instance of <see cref="GraphWithRobots"/> class
@@ -51,62 +51,49 @@ namespace Robots
         /// Gets neighbors of this node
         /// </summary>
         /// <param name="node">Node to find neighbors</param>
-        /// <returns>List of neighbors</returns>
-        private List<int> GetNeighbors(int node)
+        /// <returns>Set of neighbors</returns>
+        private SortedSet<int> GetNeighbors(int node)
         {
             int length = Graph.GetLength(0);
-            var listOfNodes = new List<int>();
+            var setOfNodes = new SortedSet<int>();
             for (int j = 0; j < length; j++)
             {
                 if (Graph[node, j] && j != node)
                 {
-                    listOfNodes.Add(j);
+                    setOfNodes.Add(j);
                 }
             }
-            listOfNodes.Sort();
-            return listOfNodes;
+            return setOfNodes;
         }
 
         /// <summary>
-        /// Gets list of positions that can be reached by robot in start position 
+        /// Gets set of positions that can be reached by robot in start position 
         /// </summary>
         /// <param name="start">Position where robot starts</param>
         /// <returns>All possible positions where robot can move</returns>
-        public IList<int> NodesCanBeReachedFromThis(int start)
+        public SortedSet<int> NodesCanBeReachedFromThis(int start)
         {
             int length = Graph.GetLength(0);
             bool[] visited = new bool[length];
-            for (int i = 0; i < length; i++)
-            {
-                visited[i] = false;
-            }
-            List<int> GetReachableNodes(int current)
+            SortedSet<int> GetReachableNodes(int current)
             {
                 visited[current] = true;
-                var resultList = new List<int>();
+                var resultSet = new SortedSet<int>();
                 var nodesNearBy = GetNeighbors(current);
                 foreach (var node in nodesNearBy)
                 {
                     if (!visited[node])
                     {
                         var temp = GetNeighbors(node);
-
-                        resultList = ListMerging.MergeWithoutRepeating(resultList, temp);
+                        resultSet.UnionWith(temp);
                     }
                 }
-                if (resultList.Count == 0)
+                if (resultSet.Count == 0)
                 {
-                    return new List<int>() { current };
+                    return new SortedSet<int>() { current };
                 }
-                foreach (var node in resultList)
-                {
-                    if (!visited[node])
-                    {
-                        var temp = GetReachableNodes(node);
-                        resultList = ListMerging.MergeWithoutRepeating(resultList, temp);
-                    }
-                }
-                return ListMerging.MergeWithoutRepeating(resultList, new List<int> { current });
+                resultSet.Add(current);
+                return resultSet;
             }
             return GetReachableNodes(start);
         }

@@ -18,11 +18,11 @@ namespace GraphWithRobotsTests
         [TestInitialize]
         public void InitTest()
         {
-            matrix1 = new bool[,] { { true, false, true },
+            matrix1 = new [,] { { true, false, true },
                                     { false, true, true },
                                     { true, true, true } };
             graph1 = new GraphWithRobots(matrix1, new int[] { 0, 2 });
-            matrix2 = new bool[,] { { true, false, true, false},
+            matrix2 = new [,] { { true, false, true, false},
                                     { false, true, true, true},
                                     { true, true, true, false},
                                     { false, true, false, true} };
