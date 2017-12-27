@@ -57,6 +57,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Model\LineFactoryTests.cs" />
+    <Compile Include="Model\SceneTests.cs" />
+    <Compile Include="Model\TemporaryLineHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,9 +71,7 @@
       <Name>MyPaint</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
