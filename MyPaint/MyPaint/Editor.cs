@@ -15,6 +15,8 @@ namespace MyPaint
 
         private TemporaryLineHandler tempLineHandler;
 
+        private IUndoStack undoStack = UndoStackFactory.CreateUndoStack();
+
         private bool IsButtonNeedsBlocking => !tempLineHandler.IsHidden;
 
         private int IdToHide => tempLineHandler.IdToHide;
@@ -101,9 +103,10 @@ namespace MyPaint
             EnableButtons();
         }
 
-        private void OnDeleteButtonClick(object sender, EventArgs e)
-        {
-            controller.SetDeleteMode();
-        }
+        private void OnDeleteButtonClick(object sender, EventArgs e) => controller.SetDeleteMode();
+
+        private void OnUndoButtonClick(object sender, EventArgs e) => undoStack.Undo();
+
+        private void OnRedoButtonClick(object sender, EventArgs e) => undoStack.Redo();
     }
 }

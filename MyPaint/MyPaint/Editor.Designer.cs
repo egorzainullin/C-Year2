@@ -66,15 +66,17 @@
             this.undoButton.TabIndex = 2;
             this.undoButton.Text = "Undo";
             this.undoButton.UseVisualStyleBackColor = true;
+            this.undoButton.Click += new System.EventHandler(this.OnUndoButtonClick);
             // 
-            // RedoButton
+            // redoButton
             // 
             this.redoButton.Location = new System.Drawing.Point(434, 39);
-            this.redoButton.Name = "RedoButton";
+            this.redoButton.Name = "redoButton";
             this.redoButton.Size = new System.Drawing.Size(75, 23);
             this.redoButton.TabIndex = 3;
             this.redoButton.Text = "Redo";
             this.redoButton.UseVisualStyleBackColor = true;
+            this.redoButton.Click += new System.EventHandler(this.OnRedoButtonClick);
             // 
             // Editor
             // 
