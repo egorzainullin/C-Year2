@@ -75,6 +75,19 @@ namespace MyPaint.Controllers
         }
 
         /// <summary>
+        /// Sets temporary line values
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <param name="point1">1st edge</param>
+        /// <param name="point2">2nd edge</param>
+        private void SetTemporaryLine(int id, Point point1, Point point2)
+        {
+            tempLineHandler.SetIdToHide(id);
+            tempLineHandler.SetFirstEdge(point1);
+            tempLineHandler.SetSecondEdge(point2);
+        }
+
+        /// <summary>
         /// Handles click on scene
         /// </summary>
         /// <param name="location">Location of click</param>
@@ -92,9 +105,7 @@ namespace MyPaint.Controllers
                         {
                             numberOfClick = 1;
                             movingLineMode = true;
-                            tempLineHandler.SetIdToHide(line.Id);
-                            tempLineHandler.SetFirstEdge(line.SecondEdge);
-                            tempLineHandler.SetSecondEdge(location);
+                            SetTemporaryLine(line.Id, line.SecondEdge, location);
                             tempLineHandler.SetVisible();
                             return;
                         }
@@ -102,9 +113,7 @@ namespace MyPaint.Controllers
                         {
                             numberOfClick = 1;
                             movingLineMode = true;
-                            tempLineHandler.SetIdToHide(line.Id);
-                            tempLineHandler.SetFirstEdge(line.FirstEdge);
-                            tempLineHandler.SetSecondEdge(location);
+                            SetTemporaryLine(line.Id, line.FirstEdge, location);
                             tempLineHandler.SetVisible();
                             return;
                         }
