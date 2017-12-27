@@ -46,6 +46,7 @@
             this.picture.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPicturePaint);
             this.picture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnPictureMouseDown);
             this.picture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnPictureMouseMove);
+            this.picture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnPictureMouseUp);
             // 
             // deleteButton
             // 

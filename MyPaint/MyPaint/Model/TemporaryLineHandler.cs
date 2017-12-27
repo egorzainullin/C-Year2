@@ -13,11 +13,19 @@ namespace MyPaint.Model
 
         private void ThrowUpdateEvent() => LineUpdated?.Invoke(this, EventArgs.Empty);
 
+        public int IdToHide { get; private set; } = -1;
+
         public ILine TemporaryLine { get; private set; }
 
         public TemporaryLineHandler()
         {
             TemporaryLine = LineFactory.CreateLine(new Point(0, 0), new Point(0, 0));
+        }
+
+        public void SetIdToHide(int id)
+        {
+            IdToHide = id;
+            ThrowUpdateEvent();
         }
 
         public bool IsHidden { get; private set; }

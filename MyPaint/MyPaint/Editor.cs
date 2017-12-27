@@ -2,12 +2,7 @@
 using MyPaint.Controllers;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MyPaint
@@ -19,6 +14,8 @@ namespace MyPaint
         private Controller controller;
 
         private TemporaryLineHandler tempLineHandler;
+
+        private int IdToHide => tempLineHandler.IdToHide;
 
         private IEnumerable<ILine> Lines => scene.Lines;
 
@@ -38,10 +35,7 @@ namespace MyPaint
 
         private void OnTemporaryLineUpdated(object sender, EventArgs args) => Redraw();
 
-        private void Redraw()
-        {
-            this.picture.Invalidate();
-        }
+        private void Redraw() => this.picture.Invalidate();
 
         private void OnPicturePaint(object sender, PaintEventArgs e)
         {
@@ -52,7 +46,10 @@ namespace MyPaint
             };
             foreach (var line in Lines)
             {
-                graphics.DrawLine(pen, line.FirstEdge, line.SecondEdge);
+                if (line.Id != IdToHide)
+                {
+                    graphics.DrawLine(pen, line.FirstEdge, line.SecondEdge);
+                }
             }
             if (!tempLineHandler.IsHidden)
             {
@@ -70,6 +67,11 @@ namespace MyPaint
         private void OnPictureMouseMove(object sender, MouseEventArgs e)
         {
             controller.HandleMove(e.Location);
+        }
+
+        private void OnPictureMouseUp(object sender, MouseEventArgs e)
+        {
+            controller.HandleMouseUp(e.Location);  
         }
     }
 }

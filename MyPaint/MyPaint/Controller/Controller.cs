@@ -24,10 +24,36 @@ namespace MyPaint.Controllers
         {
             if (!isDeleteMode)
             {
+                if (numberOfClick == 0)
+                {
+                    foreach (var line in scene.Lines)
+                    {
+                        if (line.PointNearBy(location) == 1)
+                        {
+                            numberOfClick = 1;
+                            movingLineMode = true;
+                            tempLineHandler.SetIdToHide(line.Id);
+                            tempLineHandler.SetFirstEdge(line.SecondEdge);
+                            tempLineHandler.SetSecondEdge(location);
+                            tempLineHandler.SetVisible();
+                            return;
+                        }
+                        if (line.PointNearBy(location) == 2)
+                        {
+                            numberOfClick = 1;
+                            movingLineMode = true;
+                            tempLineHandler.SetIdToHide(line.Id);
+                            tempLineHandler.SetFirstEdge(line.FirstEdge);
+                            tempLineHandler.SetSecondEdge(location);
+                            tempLineHandler.SetVisible();
+                            return;
+                        }
+                    }    
+                }
                 switch (numberOfClick)
                 {
                     case 0:
-                        ++numberOfClick;
+                        numberOfClick = 1;
                         tempLineHandler.SetFirstEdge(location);
                         tempLineHandler.SetSecondEdge(location);
                         tempLineHandler.SetVisible();
@@ -38,6 +64,21 @@ namespace MyPaint.Controllers
                         scene.AddNewLine(tempLineHandler.TemporaryLine.FirstEdge, location);
                         break;
                 }
+            }
+        }
+
+        public void HandleMouseUp(Point location)
+        {
+            if (movingLineMode)
+            {
+                numberOfClick = 0;
+                movingLineMode = false;
+                var point1 = tempLineHandler.TemporaryLine.FirstEdge;
+                var point2 = location; ;
+                scene.MoveLine(tempLineHandler.IdToHide, point1, point2);
+                tempLineHandler.SetIdToHide(-1);
+                tempLineHandler.SetHidden();
+                return;
             }
         }
 

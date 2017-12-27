@@ -12,6 +12,8 @@ namespace MyPaint.Model
 
         void SetSecondEdge(Point point);
 
+        int PointNearBy(Point point);
+
         int Id { get; }
     }
 }
