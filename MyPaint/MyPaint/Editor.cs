@@ -9,20 +9,44 @@ namespace MyPaint
 {
     public partial class Editor : Form
     {
+        /// <summary>
+        /// Scene
+        /// </summary>
         private Scene scene;
 
+        /// <summary>
+        /// Controller
+        /// </summary>
         private Controller controller;
 
+        /// <summary>
+        /// This class is responsible for temporary lines
+        /// </summary>
         private TemporaryLineHandler tempLineHandler;
 
+        /// <summary>
+        /// Undo stack
+        /// </summary>
         private IUndoStack undoStack = UndoStackFactory.CreateUndoStack();
 
+        /// <summary>
+        /// Buttons requare blocking
+        /// </summary>
         private bool IsButtonNeedsBlocking => !tempLineHandler.IsHidden;
 
+        /// <summary>
+        /// Which line should be hided
+        /// </summary>
         private int IdToHide => tempLineHandler.IdToHide;
 
+        /// <summary>
+        /// Gets line to present on scene
+        /// </summary>
         private IEnumerable<ILine> Lines => scene.Lines;
 
+        /// <summary>
+        /// Initialize Editor 
+        /// </summary>
         public Editor()
         {
             InitializeComponent();
@@ -33,6 +57,9 @@ namespace MyPaint
             this.controller = new Controller(scene, tempLineHandler);
         }
 
+        /// <summary>
+        /// Block buttons from clicking
+        /// </summary>
         private void BlockButtons()
         {
             deleteButton.Enabled = false;
@@ -40,19 +67,40 @@ namespace MyPaint
             redoButton.Enabled = false;
         }
 
+        /// <summary>
+        /// Allow user to click buttons
+        /// </summary>
         private void EnableButtons()
         {
             deleteButton.Enabled = true;
             undoButton.Enabled = true;
             redoButton.Enabled = true;
         }
-
+        
+        /// <summary>
+        /// Redraws scene view when real scene has been changed
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="args">Event args</param>
         private void OnSceneUpdated(object sender, EventArgs args) => Redraw();
 
+        /// <summary>
+        /// Redraws scene when temp line has been changed
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="args">Event args</param>
         private void OnTemporaryLineUpdated(object sender, EventArgs args) => Redraw();
 
+        /// <summary>
+        /// Redraws scene
+        /// </summary>
         private void Redraw() => this.picture.Invalidate();
 
+        /// <summary>
+        /// Redraws picture
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Args</param>
         private void OnPicturePaint(object sender, PaintEventArgs e)
         {
             var graphics = e.Graphics;
@@ -82,12 +130,22 @@ namespace MyPaint
             }
         }
 
+        /// <summary>
+        /// Handles button's click
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Args</param>
         private void OnPictureMouseDown(object sender, MouseEventArgs e)
         {
             controller.HandleClick(e.Location);
             BlockButtons();
         }
 
+        /// <summary>
+        /// Handles mouse movement
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Args</param>
         private void OnPictureMouseMove(object sender, MouseEventArgs e)
         {
             controller.HandleMove(e.Location);
@@ -97,16 +155,36 @@ namespace MyPaint
             }
         }
 
+        /// <summary>
+        /// Handles releasing button
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Args</param>
         private void OnPictureMouseUp(object sender, MouseEventArgs e)
         {
             controller.HandleMouseUp(e.Location);
             EnableButtons();
         }
 
+        /// <summary>
+        /// Handles click on delete button
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Args</param>
         private void OnDeleteButtonClick(object sender, EventArgs e) => controller.SetDeleteMode();
 
+        /// <summary>
+        /// Handles click on undo button
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Args</param>
         private void OnUndoButtonClick(object sender, EventArgs e) => undoStack.Undo();
 
+        /// <summary>
+        /// Handles redo button click
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Args</param>
         private void OnRedoButtonClick(object sender, EventArgs e) => undoStack.Redo();
     }
 }

@@ -174,9 +174,9 @@ namespace MyPaint.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Handles mouse movement
         /// </summary>
-        /// <param name="location"></param>
+        /// <param name="location">Mouse's location</param>
         public void HandleMove(Point location)
         {
             if (numberOfClick == 1)
