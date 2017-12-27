@@ -31,7 +31,7 @@
             this.picture = new System.Windows.Forms.PictureBox();
             this.deleteButton = new System.Windows.Forms.Button();
             this.undoButton = new System.Windows.Forms.Button();
-            this.RedoButton = new System.Windows.Forms.Button();
+            this.redoButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,6 +56,7 @@
             this.deleteButton.TabIndex = 1;
             this.deleteButton.Text = "deleteButton";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.OnDeleteButtonClick);
             // 
             // undoButton
             // 
@@ -68,19 +69,19 @@
             // 
             // RedoButton
             // 
-            this.RedoButton.Location = new System.Drawing.Point(434, 39);
-            this.RedoButton.Name = "RedoButton";
-            this.RedoButton.Size = new System.Drawing.Size(75, 23);
-            this.RedoButton.TabIndex = 3;
-            this.RedoButton.Text = "Redo";
-            this.RedoButton.UseVisualStyleBackColor = true;
+            this.redoButton.Location = new System.Drawing.Point(434, 39);
+            this.redoButton.Name = "RedoButton";
+            this.redoButton.Size = new System.Drawing.Size(75, 23);
+            this.redoButton.TabIndex = 3;
+            this.redoButton.Text = "Redo";
+            this.redoButton.UseVisualStyleBackColor = true;
             // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(957, 697);
-            this.Controls.Add(this.RedoButton);
+            this.Controls.Add(this.redoButton);
             this.Controls.Add(this.undoButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.picture);
@@ -98,7 +99,7 @@
         private System.Windows.Forms.PictureBox picture;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button undoButton;
-        private System.Windows.Forms.Button RedoButton;
+        private System.Windows.Forms.Button redoButton;
     }
 }
 

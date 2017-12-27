@@ -14,13 +14,15 @@ namespace MyPaint.Controllers
 
         private TemporaryLineHandler tempLineHandler;
 
+        private bool isDeleteMode = false;
+
         public Controller(Scene scene, TemporaryLineHandler temporaryLineHandler)
         {
             this.scene = scene;
             this.tempLineHandler = temporaryLineHandler;
         }
 
-        public void HandleClick(bool isDeleteMode, Point location)
+        public void HandleClick(Point location)
         {
             if (!isDeleteMode)
             {
@@ -48,7 +50,7 @@ namespace MyPaint.Controllers
                             tempLineHandler.SetVisible();
                             return;
                         }
-                    }    
+                    }
                 }
                 switch (numberOfClick)
                 {
@@ -59,11 +61,35 @@ namespace MyPaint.Controllers
                         tempLineHandler.SetVisible();
                         break;
                     case 1:
-                        numberOfClick = 0;                        
+                        numberOfClick = 0;
                         tempLineHandler.SetHidden();
                         scene.AddNewLine(tempLineHandler.TemporaryLine.FirstEdge, location);
                         break;
                 }
+            }
+            else
+            {
+                LineDeleting(location);
+            }
+        }
+
+        public void SetDeleteMode() => isDeleteMode = true;
+
+        private void LineDeleting(Point location)
+        {
+            isDeleteMode = false;
+            int idToDelete = -1;
+            foreach (var line in scene.Lines)
+            {
+                if (line.PointNearBy(location) != 0)
+                {
+                    idToDelete = line.Id;
+                    break;
+                }
+            }
+            if (idToDelete > 0)
+            {
+                scene.RemoveLine(idToDelete);
             }
         }
 

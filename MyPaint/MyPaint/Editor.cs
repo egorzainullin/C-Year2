@@ -15,11 +15,11 @@ namespace MyPaint
 
         private TemporaryLineHandler tempLineHandler;
 
+        private bool IsButtonNeedsBlocking => !tempLineHandler.IsHidden;
+
         private int IdToHide => tempLineHandler.IdToHide;
 
         private IEnumerable<ILine> Lines => scene.Lines;
-
-        private bool IsDeleteMode = false;
 
         public Editor()
         {
@@ -29,6 +29,20 @@ namespace MyPaint
             this.tempLineHandler = new TemporaryLineHandler();
             this.tempLineHandler.LineUpdated += OnTemporaryLineUpdated;
             this.controller = new Controller(scene, tempLineHandler);
+        }
+
+        private void BlockButtons()
+        {
+            deleteButton.Enabled = false;
+            undoButton.Enabled = false;
+            redoButton.Enabled = false;
+        }
+
+        private void EnableButtons()
+        {
+            deleteButton.Enabled = true;
+            undoButton.Enabled = true;
+            redoButton.Enabled = true;
         }
 
         private void OnSceneUpdated(object sender, EventArgs args) => Redraw();
@@ -48,7 +62,14 @@ namespace MyPaint
             {
                 if (line.Id != IdToHide)
                 {
-                    graphics.DrawLine(pen, line.FirstEdge, line.SecondEdge);
+                    if (line.FirstEdge == line.SecondEdge)
+                    {
+                        graphics.DrawEllipse(pen, new Rectangle(line.FirstEdge, new Size(1,1)));
+                    }
+                    else
+                    {
+                        graphics.DrawLine(pen, line.FirstEdge, line.SecondEdge);
+                    }
                 }
             }
             if (!tempLineHandler.IsHidden)
@@ -61,17 +82,28 @@ namespace MyPaint
 
         private void OnPictureMouseDown(object sender, MouseEventArgs e)
         {
-            controller.HandleClick(IsDeleteMode, e.Location);
+            controller.HandleClick(e.Location);
+            BlockButtons();
         }
 
         private void OnPictureMouseMove(object sender, MouseEventArgs e)
         {
             controller.HandleMove(e.Location);
+            if (IsButtonNeedsBlocking)
+            {
+                BlockButtons();
+            }
         }
 
         private void OnPictureMouseUp(object sender, MouseEventArgs e)
         {
-            controller.HandleMouseUp(e.Location);  
+            controller.HandleMouseUp(e.Location);
+            EnableButtons();
+        }
+
+        private void OnDeleteButtonClick(object sender, EventArgs e)
+        {
+            controller.SetDeleteMode();
         }
     }
 }

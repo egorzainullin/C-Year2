@@ -52,11 +52,13 @@
     <Compile Include="Editor.Designer.cs">
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\ICommand.cs" />
     <Compile Include="Model\ILine.cs" />
     <Compile Include="Model\Line.cs" />
     <Compile Include="Model\LineFactory.cs" />
     <Compile Include="Model\Scene.cs" />
     <Compile Include="Model\TemporaryLineHandler.cs" />
+    <Compile Include="Model\UndoStack.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Editor.resx">
