@@ -29,6 +29,32 @@ namespace MyPaint
         /// </summary>
         private IUndoStack undoStack = UndoStackFactory.GetUndoStack();
 
+        private bool isUndoButtonEnabled;
+
+        private bool isRedoButtonEnabled;
+
+        /// <summary>
+        /// Handles undo stack emptiness changed
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="args">Args</param>
+        public void OnUndoStackChanged(object sender, UndoStackArgs args)
+        {
+            isUndoButtonEnabled = !args.IsEmpty;
+            undoButton.Enabled = !args.IsEmpty;
+        }
+
+        /// <summary>
+        /// Handles redo stack emptiness changed
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="args">Args</param>
+        public void OnRedoStackChanged(object sender, UndoStackArgs args)
+        {
+            isRedoButtonEnabled = !args.IsEmpty;
+            redoButton.Enabled = !args.IsEmpty;
+        }
+
         /// <summary>
         /// Buttons require blocking
         /// </summary>
@@ -52,6 +78,10 @@ namespace MyPaint
             InitializeComponent();
             this.scene = new Scene();
             this.scene.SceneUpdated += OnSceneUpdated;
+            this.undoButton.Enabled = false;
+            this.redoButton.Enabled = false;
+            this.undoStack.UndoAvailibleChanged += OnUndoStackChanged;
+            this.undoStack.RedoAvailibleChanged += OnRedoStackChanged;
             this.tempLineHandler = new TemporaryLineHandler();
             this.tempLineHandler.LineUpdated += OnTemporaryLineUpdated;
             this.controller = new Controller(scene, tempLineHandler);
@@ -63,8 +93,8 @@ namespace MyPaint
         private void BlockButtons()
         {
             deleteButton.Enabled = false;
-            undoButton.Enabled = false;
-            redoButton.Enabled = false;
+            undoButton.Enabled = isUndoButtonEnabled;
+            redoButton.Enabled = isRedoButtonEnabled;
         }
 
         /// <summary>
@@ -73,8 +103,8 @@ namespace MyPaint
         private void EnableButtons()
         {
             deleteButton.Enabled = true;
-            undoButton.Enabled = true;
-            redoButton.Enabled = true;
+            undoButton.Enabled = isUndoButtonEnabled;
+            redoButton.Enabled = isRedoButtonEnabled;
         }
         
         /// <summary>

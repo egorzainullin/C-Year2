@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MyPaint.Controllers
 {
@@ -41,6 +42,28 @@ namespace MyPaint.Controllers
             private Stack<ICommand> redoStack;
 
             /// <summary>
+            /// This event happens when undo stack emptiness has changed
+            /// </summary>
+            public event EventHandler<UndoStackArgs> UndoAvailibleChanged;
+
+            /// <summary>
+            /// Throw UndoAvailibleChanged event
+            /// </summary>
+            /// <param name="isEmpty">Is stack empty</param>
+            private void ThrowUndoChanged(bool isEmpty) => UndoAvailibleChanged?.Invoke(this, new UndoStackArgs(isEmpty));
+
+            /// <summary>
+            /// This event happens when redo stack emptiness has changed
+            /// </summary>
+            public event EventHandler<UndoStackArgs> RedoAvailibleChanged;
+
+            /// <summary>
+            /// Throw RedoAvailibleChanged event
+            /// </summary>
+            /// <param name="isEmpty">Is stack empty</param>
+            private void ThrowRedoChanged(bool isEmpty) => RedoAvailibleChanged?.Invoke(this, new UndoStackArgs(isEmpty));
+
+            /// <summary>
             /// Initializes a new instance of <see cref="UndoStack"/> class
             /// </summary>
             public UndoStack()
@@ -48,12 +71,16 @@ namespace MyPaint.Controllers
                 this.undoStack = new Stack<ICommand>();
                 this.redoStack = new Stack<ICommand>();
             }
-            
+
             /// <summary>
             /// Adds command to undo stack
             /// </summary>
             /// <param name="command">Command to add</param>
-            public void AddCommand(ICommand command) => undoStack.Push(command);
+            public void AddCommand(ICommand command)
+            {
+                undoStack.Push(command);
+                ThrowUndoChanged(false);
+            }
 
             /// <summary>
             /// Undoes lat command
@@ -64,7 +91,12 @@ namespace MyPaint.Controllers
                 {
                     var toUndo = undoStack.Pop();
                     redoStack.Push(toUndo);
+                    ThrowRedoChanged(false);
                     toUndo.Undo();
+                }
+                if (undoStack.Count == 0)
+                {
+                    ThrowUndoChanged(true);
                 }
             }
 
@@ -77,14 +109,23 @@ namespace MyPaint.Controllers
                 {
                     var toRedo = redoStack.Pop();
                     undoStack.Push(toRedo);
+                    ThrowUndoChanged(false);
                     toRedo.Execute();
+                }
+                if (redoStack.Count == 0)
+                {
+                    ThrowRedoChanged(true);
                 }
             }
 
             /// <summary>
             /// Resets redo stack
             /// </summary>
-            public void ResetRedo() => redoStack.Clear();
+            public void ResetRedo()
+            {
+                redoStack.Clear();
+                ThrowRedoChanged(true);
+            }
         }
     }
 }
