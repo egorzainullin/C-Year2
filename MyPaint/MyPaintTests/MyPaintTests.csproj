@@ -57,6 +57,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Controllers\SceneCommandRegisterTests.cs" />
     <Compile Include="Model\LineFactoryTests.cs" />
     <Compile Include="Model\SceneTests.cs" />
     <Compile Include="Model\TemporaryLineHandlerTests.cs" />

@@ -1,4 +1,4 @@
-﻿namespace MyPaint.Model
+﻿namespace MyPaint.Controllers
 {
     /// <summary>
     /// This interface provides support of canceling and redoing operations

@@ -7,7 +7,7 @@ namespace MyPaint.Model
     /// <summary>
     /// Factory that creates lines with given parameters
     /// </summary>
-    public class LineFactory
+    public static class LineFactory
     {
         /// <summary>
         /// Internal counter necessary for keeping id unique
@@ -25,6 +25,7 @@ namespace MyPaint.Model
             ++idCounter;
             return new Line(point1, point2, idCounter);
         }
+
         /// <summary>
         /// Create a new line with given parameters
         /// </summary>

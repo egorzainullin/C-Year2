@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MyPaint.Model;
 
-namespace MyPaint.Model
+namespace MyPaint.Controllers
 {
     /// <summary>
     /// This class helps to auto register actions on scene in undo stack 
@@ -20,7 +17,7 @@ namespace MyPaint.Model
         /// <summary>
         /// Stack to add actions
         /// </summary>
-        private IUndoStack stack = UndoStackFactory.CreateUndoStack();
+        private IUndoStack stack = UndoStackFactory.GetUndoStack();
 
         /// <summary>
         /// Initializes a new instance of <see cref="SceneCommandRegister"/> 

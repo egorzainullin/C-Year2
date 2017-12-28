@@ -1,11 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MyPaint.Model;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyPaint.Model.Tests
 {
@@ -39,6 +33,18 @@ namespace MyPaint.Model.Tests
             Assert.AreEqual(point1, line.FirstEdge);
             Assert.AreEqual(point2, line.SecondEdge);
             Assert.AreEqual(2, line.Id);
+        }
+
+        [TestMethod]
+        public void PointNearByTest()
+        {
+            point1 = new Point(0, 0);
+            point2 = new Point(0, 20);
+            var line = LineFactory.CreateLine(point1, point2);
+            Assert.AreEqual(NearLineEnum.NearFirstEdge, line.PointNearBy(point1));
+            Assert.AreEqual(NearLineEnum.NearSecondEdge, line.PointNearBy(new Point(0, 22)));
+            Assert.AreEqual(NearLineEnum.NearLineButNotNearEdges, line.PointNearBy(new Point(0, 10)));
+            Assert.AreEqual(NearLineEnum.NotNear, line.PointNearBy(new Point(10, 10)));
         }
     }
 }

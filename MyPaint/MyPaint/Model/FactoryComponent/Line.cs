@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using System.Threading.Tasks;
 
 namespace MyPaint.Model.FactoryComponent
 {
@@ -39,7 +35,7 @@ namespace MyPaint.Model.FactoryComponent
         /// </summary>
         /// <param name="point1">1st point</param>
         /// <param name="point2">2nd point</param>
-        /// <returns></returns>
+        /// <returns>Calculated distance</returns>
         private static int SquareDistance(Point point1, Point point2)
         {
             int x = point1.X - point2.X;
@@ -52,7 +48,7 @@ namespace MyPaint.Model.FactoryComponent
         /// </summary>
         /// <param name="vector1">1st vector</param>
         /// <param name="vector2">2nd vector</param>
-        /// <returns></returns>
+        /// <returns>Calculated product</returns>
         private static int GetScalarProduct(Point vector1, Point vector2) => vector1.X * vector2.X + vector1.Y * vector2.Y;
 
         /// <summary>
@@ -77,28 +73,44 @@ namespace MyPaint.Model.FactoryComponent
             return Math.Sqrt(SquareInSquare / GetScalarProduct(vectorOfLine, vectorOfLine));
         }
 
+
+        /// <summary>
+        /// Checks if point contains in necessary field 
+        /// </summary>
+        /// <returns>Is contained</returns>
+        private bool IsInside(Point point)
+        {
+            int x = this.FirstEdge.X - this.SecondEdge.X;
+            int y = this.FirstEdge.Y - this.SecondEdge.Y;
+            var vector = new Point(x, y);
+            var vector1 = new Point(point.X - this.FirstEdge.X, point.Y - this.FirstEdge.Y);
+            var vector2 = new Point(point.X - this.SecondEdge.X, point.Y - this.SecondEdge.Y);
+            return (Math.Sign(GetScalarProduct(vector, vector1)) * Math.Sign(GetScalarProduct(vector, vector2))) <= 0;
+        }
+
         /// <summary>
         /// Checks is point nearby this line
         /// </summary>
         /// <param name="point">Point to check</param>
-        /// <returns>1, 2 if near 1st or 2nd edge, 3 - if near line, but not edges, 0 - otherwise</returns>
-        public int PointNearBy(Point point)
+        /// <returns>State of point relatively to line</returns>
+        public NearLineEnum PointNearBy(Point point)
         {
             var firstEdge = this.FirstEdge;
             var secondEdge = this.SecondEdge;
-            if (SquareDistance(firstEdge, point) < 9)
+            var distanceNearBy = 3;
+            if (SquareDistance(firstEdge, point) < distanceNearBy * distanceNearBy)
             {
-                return 1;
+                return NearLineEnum.NearFirstEdge;
             }
-            if (SquareDistance(secondEdge, point) < 9)
+            if (SquareDistance(secondEdge, point) < distanceNearBy * distanceNearBy)
             {
-                return 2;
+                return NearLineEnum.NearSecondEdge;
             }
-            if (DistanceToLine(point) < 3)
-            {
-                return 3;
+            if ((DistanceToLine(point) < distanceNearBy) && IsInside(point))
+            {   
+                return NearLineEnum.NearLineButNotNearEdges;
             }
-            return 0;
+            return NearLineEnum.NotNear;
         }
 
         /// <summary>

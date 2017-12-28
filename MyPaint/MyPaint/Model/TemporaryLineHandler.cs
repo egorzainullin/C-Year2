@@ -30,7 +30,7 @@ namespace MyPaint.Model
         /// <summary>
         /// Temp line to present on scene
         /// </summary>
-        public ILine TemporaryLine { get; private set; }
+        public ILine TemporaryLine { get; }
 
         /// <summary>
         /// Initializes a new instance of <see cref="TemporaryLineHandler"/> class

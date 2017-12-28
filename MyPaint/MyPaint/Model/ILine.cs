@@ -33,8 +33,8 @@ namespace MyPaint.Model
         /// Checks if point is near this line
         /// </summary>
         /// <param name="point">Point to check</param>
-        /// <returns>1,2 if near the edges, 3, if it's near the line, but not edges, 0 otherwise</returns>
-        int PointNearBy(Point point);
+        /// <returns>State of the point relatively to line</returns>
+        NearLineEnum PointNearBy(Point point);
 
         /// <summary>
         /// Gets id of this line

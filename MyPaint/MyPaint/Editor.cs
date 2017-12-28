@@ -27,10 +27,10 @@ namespace MyPaint
         /// <summary>
         /// Undo stack
         /// </summary>
-        private IUndoStack undoStack = UndoStackFactory.CreateUndoStack();
+        private IUndoStack undoStack = UndoStackFactory.GetUndoStack();
 
         /// <summary>
-        /// Buttons requare blocking
+        /// Buttons require blocking
         /// </summary>
         private bool IsButtonNeedsBlocking => !tempLineHandler.IsHidden;
 
@@ -114,7 +114,7 @@ namespace MyPaint
                 {
                     if (line.FirstEdge == line.SecondEdge)
                     {
-                        graphics.DrawEllipse(pen, new Rectangle(line.FirstEdge, new Size(1,1)));
+                        graphics.DrawEllipse(pen, new Rectangle(line.FirstEdge, new Size(1, 1)));
                     }
                     else
                     {

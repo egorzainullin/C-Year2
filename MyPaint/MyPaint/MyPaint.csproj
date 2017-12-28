@@ -45,22 +45,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Editor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor.Designer.cs">
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\ICommand.cs" />
+    <Compile Include="Controllers\ICommand.cs" />
     <Compile Include="Model\ILine.cs" />
-    <Compile Include="Model\IUndoStack.cs" />
-    <Compile Include="Model\Line.cs" />
+    <Compile Include="Controllers\IUndoStack.cs" />
+    <Compile Include="Model\FactoryComponent\Line.cs" />
     <Compile Include="Model\LineFactory.cs" />
+    <Compile Include="Model\NearLineEnum.cs" />
     <Compile Include="Model\Scene.cs" />
-    <Compile Include="Model\SceneCommandRegister.cs" />
+    <Compile Include="Controllers\SceneCommandRegister.cs" />
     <Compile Include="Model\TemporaryLineHandler.cs" />
-    <Compile Include="Model\UndoStackFactory.cs" />
+    <Compile Include="Controllers\UndoStackFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Editor.resx">

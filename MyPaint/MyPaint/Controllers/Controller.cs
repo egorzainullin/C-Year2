@@ -12,7 +12,7 @@ namespace MyPaint.Controllers
         /// <summary>
         /// Scene of editor
         /// </summary>
-        private Scene scene;
+        private readonly Scene scene;
 
         /// <summary>
         /// Number of clicks
@@ -93,7 +93,7 @@ namespace MyPaint.Controllers
         /// <param name="location">Location of click</param>
         public void HandleClick(Point location)
         {
-            var stack = UndoStackFactory.CreateUndoStack();
+            var stack = UndoStackFactory.GetUndoStack();
             stack.ResetRedo();
             if (!isDeleteMode)
             {
@@ -101,7 +101,7 @@ namespace MyPaint.Controllers
                 {
                     foreach (var line in scene.Lines)
                     {
-                        if (line.PointNearBy(location) == 1)
+                        if (line.PointNearBy(location) == NearLineEnum.NearFirstEdge)
                         {
                             numberOfClick = 1;
                             movingLineMode = true;
@@ -109,7 +109,7 @@ namespace MyPaint.Controllers
                             tempLineHandler.SetVisible();
                             return;
                         }
-                        if (line.PointNearBy(location) == 2)
+                        if (line.PointNearBy(location) == NearLineEnum.NearSecondEdge)
                         {
                             numberOfClick = 1;
                             movingLineMode = true;

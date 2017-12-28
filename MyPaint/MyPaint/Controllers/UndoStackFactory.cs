@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MyPaint.Model
+namespace MyPaint.Controllers
 {
     /// <summary>
     /// This class creates undo stack and provides access to it
@@ -16,7 +16,7 @@ namespace MyPaint.Model
         /// Creates undo stack
         /// </summary>
         /// <returns>Created undo stack</returns>
-        public static IUndoStack CreateUndoStack()
+        public static IUndoStack GetUndoStack()
         {
             if (instance == null)
             {

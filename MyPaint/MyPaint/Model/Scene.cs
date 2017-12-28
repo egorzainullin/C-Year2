@@ -39,6 +39,12 @@ namespace MyPaint.Model
         /// <returns>Line with this id</returns>
         public ILine GetLineById(int id) => linesDictionary.ContainsKey(id) ? linesDictionary[id] : null;
 
+        /// <summary>
+        /// Adds new line with give edges
+        /// </summary>
+        /// <param name="point1">1st edge</param>
+        /// <param name="point2">2nd edge</param>
+        /// <returns>Id of created line</returns>
         public int AddNewLine(Point point1, Point point2)
         {
             var line = LineFactory.CreateLine(point1, point2);
